@@ -1,0 +1,74 @@
+{
+  "slug": "in-app-ai-assistant",
+  "kind": "case-study",
+  "visibility": "public-approved",
+  "title": "An in-app AI assistant that knows what each user can see",
+  "summary": "A prototype assistant built into an enterprise application. It guides business users through tasks and answers questions using the current screen, the features they can access, and documentation written by the teams that own each part of the UI.",
+  "role": "Sole builder",
+  "status": "Prototype, demonstrated to stakeholders",
+  "period": "2026",
+  "accent": "violet",
+  "technologies": ["Python", "Pydantic", "React"],
+  "topics": ["LLM applications", "Retrieval-augmented generation", "Context engineering", "Micro-frontends"],
+  "highlights": [
+    "Answers are scoped to the features each user's license and feature flags enable",
+    "Context-aware help: step-by-step guidance, deep links, and explanations of any UI element the user selects",
+    "Optional developer-authored tags let each micro-frontend team document its own UI"
+  ],
+  "problem": [
+    "Business users of a large enterprise application struggled to find features, complete multi-step tasks, and get useful answers from documentation that was hard to navigate.",
+    "They relied on reading docs, asking colleagues or support, and trial and error. Repeated questions added to the support load."
+  ],
+  "constraints": [
+    "Users see different features depending on their license and feature-flag setup, so a generic answer could describe something a user cannot access.",
+    "The application is built from micro-frontends hosted by multiple teams, so knowledge about the UI is spread across and owned by those teams."
+  ],
+  "contribution": [
+    "I designed and built the prototype on my own.",
+    "The assistant answers questions, gives step-by-step instructions, provides deep links to the right place in the app, and explains a UI element when the user selects it.",
+    "It builds its context from several sources: static documentation, the content of the user's current page, backend endpoints that report the user's enabled features, selected application code, and optional custom HTML tags in which developers describe their UI elements."
+  ],
+  "decisions": [
+    {
+      "title": "Scope answers to what each user can access",
+      "choice": "Fetch the user's enabled features from backend endpoints and combine them with the content of the page the user is on, which is already filtered for that user.",
+      "alternative": "Answer from the full documentation set for every user.",
+      "tradeoff": "Each answer depends on live context gathered at question time instead of a single static index. In exchange, the assistant avoids describing features the user's license or flags do not include."
+    },
+    {
+      "title": "Let the teams that own the UI explain it",
+      "choice": "Support optional custom HTML tags so each micro-frontend team can describe its own UI elements with better context.",
+      "alternative": "Rely only on a central documentation source maintained separately from the teams' code.",
+      "tradeoff": "Tag coverage depends on which teams add them. Because the tags are optional, the assistant still works from documentation, page content, and backend data where none exist."
+    }
+  ],
+  "results": [
+    {
+      "claim": "A working prototype was demonstrated to stakeholders, and product managers are now considering it for roadmap and funding.",
+      "basis": "Qualitative stakeholder feedback from demos. No usage, accuracy, or support-load impact has been measured."
+    },
+    {
+      "claim": "Answers are grounded in retrieved sources and limited to the features visible to the current user.",
+      "basis": "A property of the prototype's design: context is filtered by license and feature flags and by the user's current page. Not yet tested systematically."
+    }
+  ],
+  "limitations": [
+    "No real measurement yet. Answer accuracy has not been formally tested.",
+    "User adoption has not been tested.",
+    "Developer-authored context depends on teams choosing to add tags."
+  ],
+  "lessons": [
+    "Giving the model the right, filtered context mattered more than the choice of model.",
+    "In a distributed frontend, letting each team own the explanation of its UI fits better than a central knowledge base alone."
+  ],
+  "nextSteps": [
+    "Test answer accuracy systematically.",
+    "Test adoption with real users."
+  ],
+  "diagram": {
+    "title": "How the assistant builds an answer",
+    "source": "flowchart LR\n  user[User asks or selects a UI element] --> panel[In-app assistant]\n  panel --> context[Context builder]\n  screen[Current page and optional developer tags] --> context\n  access[Enabled features from backend] --> context\n  docs[(Documentation and selected code)] --> context\n  context --> llm[LLM]\n  llm --> answer[Steps, explanation, and deep links]\n  classDef input fill:#dbeafe,stroke:#1d4ed8,color:#172554\n  classDef process fill:#ccfbf1,stroke:#0f766e,color:#134e4a\n  classDef data fill:#ede9fe,stroke:#6d28d9,color:#2e1065\n  classDef live fill:#fef3c7,stroke:#b45309,color:#451a03\n  classDef output fill:#ffedd5,stroke:#c2410c,color:#431407\n  class user input\n  class panel,context,llm process\n  class docs data\n  class screen,access live\n  class answer output",
+    "description": "A user asks a question or selects a UI element in the in-app assistant. A context builder combines the current page and optional developer tags, the user's enabled features from the backend, and documentation and selected code. An LLM uses that context to produce steps, an explanation, and deep links.",
+    "legend": ["Blue: user input", "Teal: assistant processing", "Purple cylinder: stored knowledge", "Amber: live context", "Orange: answer"]
+  }
+}

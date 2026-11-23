@@ -19,6 +19,17 @@ A synthetic frontend case study about readable decisions, keyboard access, and p
 Technologies: React · TypeScript
 Topics: Accessibility · State management · Interaction design
 
+## [An in\-app AI assistant that knows what each user can see](projects/in-app-ai-assistant/README.md)
+
+A prototype assistant built into an enterprise application\. It guides business users through tasks and answers questions using the current screen, the features they can access, and documentation written by the teams that own each part of the UI\.
+
+- Answers are scoped to the features each user's license and feature flags enable
+- Context\-aware help: step\-by\-step guidance, deep links, and explanations of any UI element the user selects
+- Optional developer\-authored tags let each micro\-frontend team document its own UI
+
+Technologies: Python · Pydantic · React
+Topics: LLM applications · Retrieval\-augmented generation · Context engineering · Micro\-frontends
+
 ## [Making event delivery predictable](projects/reliable-event-delivery/README.md) · synthetic example
 
 A synthetic backend case study about retrying safely, handling duplicates, and making failure visible\.
