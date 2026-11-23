@@ -1,6 +1,6 @@
 # Review before publishing
 
-Nothing in this project creates a repository, enables Pages, edits a profile, or publishes automatically. The Pages workflow at `.github/workflows/github-pages.yml` is manual-only: it has no push or schedule trigger.
+Nothing in this project creates a repository, enables Pages, or edits a profile. Every push to `main` publishes the site through `.github/workflows/github-pages.yml`, so review content before it reaches `main`.
 
 ## Repository placement
 
@@ -31,13 +31,17 @@ Check:
 - Desktop/mobile layouts, keyboard focus and expansion, tag browsing, both themes, and diagram/text equivalents.
 - Reproduction from the lockfile with the documented Node and Chrome requirements.
 
-## Activation, only after explicit authorization
+## Publishing
 
-The user must separately authorize repository creation, committing/pushing, Pages activation, profile changes, and actual publishing as applicable. An approval to generate files is not publication approval.
+Pushing to `main` publishes. The user must separately authorize repository creation, pushing to `main`, Pages or workflow changes, and profile changes. An approval to generate files is not publication approval.
 
-The manual-only workflow at `.github/workflows/github-pages.yml` builds, checks, and deploys `dist/`. After approval, a maintainer chooses GitHub Actions as the Pages source and runs it manually on the reviewed branch. Review current action versions and pin them according to the repository's supply-chain policy before activation.
+`.github/workflows/github-pages.yml` builds, checks, and deploys `dist/` on every push to `main`, and can also be run manually. GitHub Pages must use GitHub Actions as its source. `.github/workflows/check.yml` runs the same checks on pull requests without deploying.
 
-The workflow expects hosted Ubuntu with Chrome at `/usr/bin/google-chrome`. Adjust `CHROME_PATH` if needed. It has never been run on GitHub; local checks do not establish that hosted CI or deployment works.
+Actions are pinned to commit SHAs with the version in a comment. Dependabot (`.github/dependabot.yml`) opens weekly update pull requests for actions and npm dependencies; review them and let the check pass before merging.
+
+The workflows run on hosted Ubuntu with Chrome at `/usr/bin/google-chrome`. Adjust `CHROME_PATH` if needed.
+
+This repository is served as a project site, so `basePath` is `/project-portfolio`. Renaming the repository requires updating `basePath` to match.
 
 Keep `dist/` as the Pages artifact. `.nojekyll` is generated. Do not upload private workspaces or the entire machine/work directory. A private backing repository does not by itself make a normal Pages website private.
 

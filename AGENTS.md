@@ -10,4 +10,4 @@
 - Keep demo projects clearly synthetic. Never infer personal achievements from fixtures.
 - `generated/`, `dist/`, and the marked root README index (when present) are generated. Edit content or templates, not those outputs.
 - Generated code, content, diagrams, and all repository files require review before release.
-- Do not create repositories, commit, push, enable Pages, install an active deployment workflow, or publish without explicit authorization for that exact action.
+- Pushing to `main` publishes the site. Do not create repositories, commit, push, change GitHub settings or workflow triggers, or publish without explicit authorization for that exact action.

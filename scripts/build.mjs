@@ -149,7 +149,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   try {
     const result = await build();
     console.log(`Built ${result.projects} projects, ${result.tags} tag pages, ${result.diagrams} diagrams in ${((performance.now() - started) / 1000).toFixed(2)}s.`);
-    console.log('Static website: dist/ · GitHub Markdown: generated/ · Deployment: manual workflow only');
+    console.log('Static website: dist/ · GitHub Markdown: generated/ · Deployment: GitHub Actions on push to main');
   } catch (error) {
     console.error(`Build failed: ${error.message}`);
     process.exitCode = 1;

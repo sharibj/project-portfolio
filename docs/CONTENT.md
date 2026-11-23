@@ -1,6 +1,6 @@
 # Public content contract
 
-The canonical source is `content/projects/<slug>.json`. The actual validator is `scripts/model.mjs`; it rejects unknown fields instead of silently publishing them. Use the synthetic fixtures as complete examples, not as facts about the owner.
+The canonical source is `content/projects/<slug>.json`. The actual validator is `scripts/model.mjs`; it rejects unknown fields instead of silently publishing them. See `content/projects/in-app-ai-assistant.json` for a complete example. The synthetic fixtures in `test/fixtures.mjs` are test data only, not facts about the owner.
 
 ## Required fields
 
@@ -42,4 +42,4 @@ Unknown outcomes are valid: state “Not yet measured” or explain the limited 
 
 Updating one JSON updates every presentation. Remove the canonical JSON and rebuild to remove its generated page, Markdown, and unused tag pages. The build replaces only marked generated directories; it never deletes the canonical content files.
 
-For a new site, customize the config and remove/replace demo JSON only after deciding what to show. A collection may be empty. Do not reclassify synthetic examples as real projects.
+A collection may be empty. Do not reclassify synthetic examples as real projects.

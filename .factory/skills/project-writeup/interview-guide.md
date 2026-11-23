@@ -78,4 +78,4 @@ Keep outside the repository or in the conversation only:
 - Each result includes its evidence basis; uncertainty and limitations remain visible.
 - Exact public text/tags/visuals were approved before canonical import.
 - Generated site and README agree; private review material never entered the repository.
-- Publishing is still inactive.
+- Nothing was pushed or published without separate authorization.

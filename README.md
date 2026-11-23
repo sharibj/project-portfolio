@@ -2,7 +2,7 @@
 
 A reusable Factory interview skill and a lightweight static portfolio generator. One repository holds every case study, themed page, tag index, shared style, and site build.
 
-**The included projects are synthetic demonstrations. They are not personal achievements. Nothing is deployed.**
+**Case studies are public-safe write-ups. The original implementation source stays private. The site is published at https://sharibj.github.io/project-portfolio/.**
 
 ## Run locally
 
@@ -14,7 +14,7 @@ npm run check
 npm run preview
 ```
 
-Open `http://127.0.0.1:4173`. Set `CHROME_PATH` to your browser executable if it is not found automatically. Run commands from this directory.
+Open `http://127.0.0.1:4173` plus the configured `basePath` (currently `http://127.0.0.1:4173/project-portfolio/`). Set `CHROME_PATH` to your browser executable if it is not found automatically. Run commands from this directory.
 
 ## Interview → approved content → portfolio
 
@@ -35,7 +35,7 @@ There is no application API key, model call, or interview database. The intervie
 
 Edit `portfolio.config.json`: name, title, introduction, bio, and optional GitHub username/public origin. Leave the username and site URL empty until chosen. For a user site, leave `basePath` empty; a project site can use `"/portfolio"` without a trailing slash. `siteUrl` is only the HTTPS origin, with no path.
 
-Keep demo language until you replace the synthetic fixtures with approved real content. Colors, spacing, typography, and responsive layouts live in `assets/style.css`; shared markup lives in `scripts/templates.mjs`.
+Colors, spacing, typography, and responsive layouts live in `assets/style.css`; shared markup lives in `scripts/templates.mjs`.
 
 ## Generated outputs
 
@@ -50,6 +50,10 @@ Builds reject unexpected content fields, invalid slugs, tag spelling collisions,
 
 The build refuses to replace `dist/`, `generated/`, or `public-package/` directories without its generated marker. Build failures during validation/rendering preserve the previous successful website. Do not put hand-edited files in generated directories.
 
-## Deployment is manual
+## Deployment
 
-`.github/workflows/github-pages.yml` runs only when started manually (`workflow_dispatch`). No push or schedule triggers it, and it deploys nothing until Pages uses GitHub Actions as its source and someone runs it. [Deployment instructions](docs/DEPLOYMENT.md) explain user-site placement and the separate review/authorization needed to activate it. No repository is created and no GitHub settings are changed by any command.
+Every push to `main` deploys the site through `.github/workflows/github-pages.yml`. The workflow installs from the lockfile, runs `npm run check`, and publishes `dist/` to GitHub Pages. You can also start it manually from the Actions tab. Pull requests run the same check through `.github/workflows/check.yml` without deploying. Actions are pinned to commit SHAs, and Dependabot proposes weekly updates for actions and npm dependencies. See the [deployment notes](docs/DEPLOYMENT.md).
+
+## License
+
+The generator code (scripts, assets, tests, workflows, and the Factory skill) is available under the [MIT License](LICENSE). The case study content in `content/projects/`, `generated/`, and the published site is © Sharib Jafari, all rights reserved, and is not covered by the MIT License.

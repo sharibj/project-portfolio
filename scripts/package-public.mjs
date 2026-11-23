@@ -8,7 +8,7 @@ import { readModel } from './model.mjs';
 // Explicit allowlist, never a repository-wide copy. Review this list when adding tools.
 export const PUBLIC_SOURCE_FILES = [
   'package.json', 'package-lock.json', '.puppeteerrc.cjs', '.gitignore',
-  'portfolio.config.json', 'README.md', 'AGENTS.md',
+  'portfolio.config.json', 'README.md', 'AGENTS.md', 'LICENSE',
   'assets/style.css', 'assets/site.js',
   'scripts/model.mjs', 'scripts/templates.mjs', 'scripts/build.mjs',
   'scripts/check.mjs', 'scripts/serve.mjs', 'scripts/package-public.mjs',
