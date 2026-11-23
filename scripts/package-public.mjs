@@ -13,7 +13,6 @@ export const PUBLIC_SOURCE_FILES = [
   'scripts/model.mjs', 'scripts/templates.mjs', 'scripts/build.mjs',
   'scripts/check.mjs', 'scripts/serve.mjs', 'scripts/package-public.mjs',
   'docs/CONTENT.md', 'docs/DEPLOYMENT.md',
-  'deployment/github-pages.yml',
   'test/portfolio.test.mjs', 'test/fixtures.mjs',
   '.factory/skills/project-writeup/SKILL.md',
   '.factory/skills/project-writeup/interview-guide.md'

@@ -50,6 +50,6 @@ Builds reject unexpected content fields, invalid slugs, tag spelling collisions,
 
 The build refuses to replace `dist/`, `generated/`, or `public-package/` directories without its generated marker. Build failures during validation/rendering preserve the previous successful website. Do not put hand-edited files in generated directories.
 
-## Deployment is inactive
+## Deployment is manual
 
-`deployment/github-pages.yml` is a draft outside `.github/workflows/`. It cannot deploy anything as provided. [Deployment instructions](docs/DEPLOYMENT.md) explain user-site placement and the separate review/authorization needed to activate it. No repository is created and no GitHub settings are changed by any command.
+`.github/workflows/github-pages.yml` runs only when started manually (`workflow_dispatch`). No push or schedule triggers it, and it deploys nothing until Pages uses GitHub Actions as its source and someone runs it. [Deployment instructions](docs/DEPLOYMENT.md) explain user-site placement and the separate review/authorization needed to activate it. No repository is created and no GitHub settings are changed by any command.

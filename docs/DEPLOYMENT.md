@@ -1,6 +1,6 @@
 # Review before publishing
 
-Nothing in this project creates a repository, enables Pages, edits a profile, or publishes. The deployment example is deliberately outside `.github/workflows/` with an `.example` extension.
+Nothing in this project creates a repository, enables Pages, edits a profile, or publishes automatically. The Pages workflow at `.github/workflows/github-pages.yml` is manual-only: it has no push or schedule trigger.
 
 ## Repository placement
 
@@ -35,9 +35,9 @@ Check:
 
 The user must separately authorize repository creation, committing/pushing, Pages activation, profile changes, and actual publishing as applicable. An approval to generate files is not publication approval.
 
-The inactive example at `deployment/github-pages.yml` illustrates a manual-only Actions build/deployment. After approval, a maintainer can place a reviewed workflow in `.github/workflows/pages.yml`, choose GitHub Actions as the Pages source, and run it manually on the reviewed branch. Review current action versions and pin them according to the repository's supply-chain policy before activation.
+The manual-only workflow at `.github/workflows/github-pages.yml` builds, checks, and deploys `dist/`. After approval, a maintainer chooses GitHub Actions as the Pages source and runs it manually on the reviewed branch. Review current action versions and pin them according to the repository's supply-chain policy before activation.
 
-The draft expects hosted Ubuntu with Chrome at `/usr/bin/google-chrome`. Adjust `CHROME_PATH` if needed. It has never been run on GitHub; local checks do not establish that hosted CI or deployment works.
+The workflow expects hosted Ubuntu with Chrome at `/usr/bin/google-chrome`. Adjust `CHROME_PATH` if needed. It has never been run on GitHub; local checks do not establish that hosted CI or deployment works.
 
 Keep `dist/` as the Pages artifact. `.nojekyll` is generated. Do not upload private workspaces or the entire machine/work directory. A private backing repository does not by itself make a normal Pages website private.
 

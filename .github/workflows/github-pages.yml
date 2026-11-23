@@ -1,6 +1,6 @@
-# INACTIVE EXAMPLE. Keep outside .github/workflows until the user authorizes publishing.
-# After full content/source/output review, configure Pages to use Actions and copy this
-# file to .github/workflows/pages.yml. Manual execution publishes the reviewed branch.
+# MANUAL-ONLY. Runs only through workflow_dispatch; nothing triggers it automatically.
+# Before each run, review content, source, and outputs, and set Pages to use GitHub Actions.
+# A run publishes dist/ from the selected branch.
 name: Publish reviewed portfolio
 on:
   workflow_dispatch:

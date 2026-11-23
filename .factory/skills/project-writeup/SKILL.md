@@ -99,6 +99,6 @@ If the username/URL is still unknown, leave config fields empty and say that pro
 
 ## 7. Handoff, not publication
 
-Summarize what was generated, checks actually run, evidence limits, and unresolved disclosure questions. Offer `npm run package:public` for an allowlisted review package, not as an upload action. Keep `deployment/github-pages.yml` inactive and outside auto-trigger paths.
+Summarize what was generated, checks actually run, evidence limits, and unresolved disclosure questions. Offer `npm run package:public` for an allowlisted review package, not as an upload action. Keep `.github/workflows/github-pages.yml` manual-only; never add push or schedule triggers or run it without separate authorization.
 
 Success means an accurate, approved public-safe content source plus locally validated README/site outputs. It does not mean private implementation has been verified or that anything is published.

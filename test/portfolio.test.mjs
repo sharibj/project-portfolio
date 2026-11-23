@@ -205,7 +205,6 @@ test('public packaging copies only the allowlist and never enables deployment', 
   assert.ok(count > 40);
   const files = await walk(path.join(root, 'public-package'));
   assert.ok(files.includes('.factory/skills/project-writeup/SKILL.md'));
-  assert.ok(files.includes('deployment/github-pages.yml'));
   assert.ok(files.includes('test/portfolio.test.mjs'));
   assert.ok(!files.some(file => /^(?:\.github|\.private|node_modules)\//.test(file) || file === 'transcript.txt'));
   for (const file of files) assert.ok(!(await readFile(path.join(root, 'public-package', file), 'utf8')).includes(canary), file);
