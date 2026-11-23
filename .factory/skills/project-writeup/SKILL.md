@@ -92,13 +92,13 @@ After explicit content approval:
 2. Preserve stable slugs and unrelated content. Keep private provenance and review notes outside the repository.
 3. Run `npm run check`. Fix validation/build/link failures; do not relax disclosure or evidence requirements to make it pass.
 4. Preview with `npm run preview`. Check the actual project URL, gallery/index update, tag links, collapsed decisions via keyboard, mobile readability, diagram, and both themes. If a browser is unavailable, report the UI checks as skipped.
-5. Review generated Markdown (`generated/projects/<slug>/README.md`), the marked root README index, and `generated/profile-README.md`. They must match the same approved JSON.
+5. Review generated Markdown (`generated/projects/<slug>/README.md`), the marked root README index (if `README.md` has markers), and `generated/profile-README.md`. They must match the same approved JSON.
 6. Ask the user to review the final presentation, code/config changes, repository file set, and built output. Fix requested changes. Factual/content changes need renewed exact-content approval before import.
 
 If the username/URL is still unknown, leave config fields empty and say that profile/site links are not configured. Do not invent an identity or a deployment URL.
 
 ## 7. Handoff, not publication
 
-Summarize what was generated, checks actually run, evidence limits, and unresolved disclosure questions. Offer `npm run package:public` for an allowlisted review package, not as an upload action. Keep `deployment/github-pages.yml.example` inactive and outside auto-trigger paths.
+Summarize what was generated, checks actually run, evidence limits, and unresolved disclosure questions. Offer `npm run package:public` for an allowlisted review package, not as an upload action. Keep `deployment/github-pages.yml` inactive and outside auto-trigger paths.
 
 Success means an accurate, approved public-safe content source plus locally validated README/site outputs. It does not mean private implementation has been verified or that anything is published.

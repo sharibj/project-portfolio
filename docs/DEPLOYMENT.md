@@ -35,7 +35,7 @@ Check:
 
 The user must separately authorize repository creation, committing/pushing, Pages activation, profile changes, and actual publishing as applicable. An approval to generate files is not publication approval.
 
-The inactive example at `deployment/github-pages.yml.example` illustrates a manual-only Actions build/deployment. After approval, a maintainer can place a reviewed workflow in `.github/workflows/pages.yml`, choose GitHub Actions as the Pages source, and run it manually on the reviewed branch. Review current action versions and pin them according to the repository's supply-chain policy before activation.
+The inactive example at `deployment/github-pages.yml` illustrates a manual-only Actions build/deployment. After approval, a maintainer can place a reviewed workflow in `.github/workflows/pages.yml`, choose GitHub Actions as the Pages source, and run it manually on the reviewed branch. Review current action versions and pin them according to the repository's supply-chain policy before activation.
 
 The draft expects hosted Ubuntu with Chrome at `/usr/bin/google-chrome`. Adjust `CHROME_PATH` if needed. It has never been run on GitHub; local checks do not establish that hosted CI or deployment works.
 

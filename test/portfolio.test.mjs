@@ -141,7 +141,7 @@ test('failed validation or diagram rendering preserves the last successful outpu
   assert.equal(await digest(root), before);
 });
 
-test('refuses to replace an unmanaged output or an unmarked README', async t => {
+test('refuses to replace an unmanaged output and leaves an unmarked README untouched', async t => {
   const root = await fixture(t);
   await mkdir(path.join(root, 'dist'));
   await writeFile(path.join(root, 'dist/user-file.txt'), 'preserve');
@@ -149,8 +149,11 @@ test('refuses to replace an unmanaged output or an unmarked README', async t => 
   assert.equal(await readFile(path.join(root, 'dist/user-file.txt'), 'utf8'), 'preserve');
   await rm(path.join(root, 'dist'), { recursive: true });
   await writeFile(path.join(root, 'README.md'), '# User-owned content');
-  await assert.rejects(build({ root, diagramRenderer: fakeDiagram }), /marker pair/);
+  await build({ root, diagramRenderer: fakeDiagram });
   assert.equal(await readFile(path.join(root, 'README.md'), 'utf8'), '# User-owned content');
+  await writeFile(path.join(root, 'README.md'), '# User-owned content\n<!-- portfolio:start -->\n');
+  await assert.rejects(build({ root, diagramRenderer: fakeDiagram }), /marker pair/);
+  assert.equal(await readFile(path.join(root, 'README.md'), 'utf8'), '# User-owned content\n<!-- portfolio:start -->\n');
 });
 
 test('rejects unexpected content files, symlinks and ambiguous tag spelling', async t => {
@@ -202,7 +205,7 @@ test('public packaging copies only the allowlist and never enables deployment', 
   assert.ok(count > 40);
   const files = await walk(path.join(root, 'public-package'));
   assert.ok(files.includes('.factory/skills/project-writeup/SKILL.md'));
-  assert.ok(files.includes('deployment/github-pages.yml.example'));
+  assert.ok(files.includes('deployment/github-pages.yml'));
   assert.ok(files.includes('test/portfolio.test.mjs'));
   assert.ok(!files.some(file => /^(?:\.github|\.private|node_modules)\//.test(file) || file === 'transcript.txt'));
   for (const file of files) assert.ok(!(await readFile(path.join(root, 'public-package', file), 'utf8')).includes(canary), file);

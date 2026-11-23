@@ -43,7 +43,7 @@ Keep demo language until you replace the synthetic fixtures with approved real c
 - `generated/projects/<slug>/README.md`: GitHub-readable case studies with Mermaid and collapsed decisions.
 - `generated/README.md`: Markdown project index.
 - `generated/profile-README.md`: optional profile snippet, not an automatic profile edit.
-- This README's marked index below updates from the same content.
+- If this README contains `portfolio:start` / `portfolio:end` markers, the index between them updates from the same content.
 - `public-package/`: created only by `npm run package:public`. An explicit allowlist includes the source and synthetic-only tests, and excludes research, unrelated files, dependencies, and private inputs. Review every included file before publishing.
 
 Builds reject unexpected content fields, invalid slugs, tag spelling collisions, unapproved visibility markers, unsafe diagram constructs, and some common secret/email patterns. These checks cannot determine truth, ownership, consent, or confidentiality.
@@ -52,42 +52,4 @@ The build refuses to replace `dist/`, `generated/`, or `public-package/` directo
 
 ## Deployment is inactive
 
-`deployment/github-pages.yml.example` is a draft outside `.github/workflows/`. It cannot deploy anything as provided. [Deployment instructions](docs/DEPLOYMENT.md) explain user-site placement and the separate review/authorization needed to activate it. No repository is created and no GitHub settings are changed by any command.
-
-## Project index
-
-<!-- portfolio:start -->
-
-# Sharib Jafari · Project portfolio
-
-The context, decisions, and tradeoffs behind the work\. A portfolio of public\-safe engineering case studies\.
-
-**Public-safe case studies, not the original implementation source.**
-
-**Demo content:** Synthetic examples below are not personal achievements.
-
-[Explore the themed portfolio](https://sharibj.github.io/)
-
-## [A review flow that keeps its place](generated/projects/accessible-review-workflow/README.md) · synthetic example
-
-A synthetic frontend case study about readable decisions, keyboard access, and preserving context during review\.
-
-- Key information before expandable detail
-- Keyboard\-first review controls
-- Draft state kept separate from submitted state
-
-Technologies: React · TypeScript
-Topics: Accessibility · State management · Interaction design
-
-## [Making event delivery predictable](generated/projects/reliable-event-delivery/README.md) · synthetic example
-
-A synthetic backend case study about retrying safely, handling duplicates, and making failure visible\.
-
-- Explicit retry and failure states
-- Idempotency at the consumer boundary
-- A recovery path operators can inspect
-
-Technologies: TypeScript · PostgreSQL
-Topics: Reliability · Event\-driven systems · Observability
-
-<!-- portfolio:end -->
+`deployment/github-pages.yml` is a draft outside `.github/workflows/`. It cannot deploy anything as provided. [Deployment instructions](docs/DEPLOYMENT.md) explain user-site placement and the separate review/authorization needed to activate it. No repository is created and no GitHub settings are changed by any command.

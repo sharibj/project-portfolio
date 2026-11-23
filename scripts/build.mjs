@@ -94,10 +94,11 @@ export async function build({ root = ROOT, diagramRenderer = renderDiagram } = {
   const readme = await readFile(readmePath, 'utf8');
   const start = '<!-- portfolio:start -->';
   const end = '<!-- portfolio:end -->';
-  if (readme.split(start).length !== 2 || readme.split(end).length !== 2 || readme.indexOf(start) > readme.indexOf(end)) {
-    throw new Error('README.md needs exactly one ordered portfolio:start / portfolio:end marker pair. Refusing to overwrite unrelated text.');
+  const unmarked = !readme.includes(start) && !readme.includes(end);
+  if (!unmarked && (readme.split(start).length !== 2 || readme.split(end).length !== 2 || readme.indexOf(start) > readme.indexOf(end))) {
+    throw new Error('README.md needs exactly one ordered portfolio:start / portfolio:end marker pair, or none. Refusing to overwrite unrelated text.');
   }
-  const nextReadme = readme.slice(0, readme.indexOf(start) + start.length) + '\n\n' + markdownIndex(model) + '\n' + readme.slice(readme.indexOf(end));
+  const nextReadme = unmarked ? null : readme.slice(0, readme.indexOf(start) + start.length) + '\n\n' + markdownIndex(model) + '\n' + readme.slice(readme.indexOf(end));
   const stage = await mkdtemp(path.join(root, '.portfolio-build-'));
   const website = path.join(stage, 'dist');
   const generated = path.join(stage, 'generated');
@@ -136,7 +137,7 @@ export async function build({ root = ROOT, diagramRenderer = renderDiagram } = {
     }
     await replaceManagedDirectory(website, path.join(root, 'dist'));
     await replaceManagedDirectory(generated, path.join(root, 'generated'));
-    await writeFile(readmePath, nextReadme);
+    if (nextReadme !== null) await writeFile(readmePath, nextReadme);
     return { projects: projects.length, diagrams: projects.filter(project => project.diagram).length, tags: [...taxonomy.technologies, ...taxonomy.topics].length };
   } finally {
     await rm(stage, { recursive: true, force: true });
