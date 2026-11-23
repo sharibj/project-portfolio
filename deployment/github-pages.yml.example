@@ -1,0 +1,42 @@
+# INACTIVE EXAMPLE. Keep outside .github/workflows until the user authorizes publishing.
+# After full content/source/output review, configure Pages to use Actions and copy this
+# file to .github/workflows/pages.yml. Manual execution publishes the reviewed branch.
+name: Publish reviewed portfolio
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+      - run: npm run check
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy reviewed artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
