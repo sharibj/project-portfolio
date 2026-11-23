@@ -6,7 +6,7 @@ The context, decisions, and tradeoffs behind the work\. A portfolio of public\-s
 
 **Demo content:** Synthetic examples below are not personal achievements.
 
-[Explore the themed portfolio](https://sharibj.github.io/)
+[Explore the themed portfolio](https://sharibj.github.io/project-portfolio/)
 
 ## [A review flow that keeps its place](projects/accessible-review-workflow/README.md) · synthetic example
 

@@ -6,9 +6,9 @@ The context, decisions, and tradeoffs behind the work\. A portfolio of public\-s
 
 **Demo content:** Synthetic examples below are not personal achievements.
 
-[Explore the themed portfolio](https://sharibj.github.io/)
+[Explore the themed portfolio](https://sharibj.github.io/project-portfolio/)
 
-## [A review flow that keeps its place](https://sharibj.github.io/projects/accessible-review-workflow/) · synthetic example
+## [A review flow that keeps its place](https://sharibj.github.io/project-portfolio/projects/accessible-review-workflow/) · synthetic example
 
 A synthetic frontend case study about readable decisions, keyboard access, and preserving context during review\.
 
@@ -19,7 +19,7 @@ A synthetic frontend case study about readable decisions, keyboard access, and p
 Technologies: React · TypeScript
 Topics: Accessibility · State management · Interaction design
 
-## [An in\-app AI assistant that knows what each user can see](https://sharibj.github.io/projects/in-app-ai-assistant/)
+## [An in\-app AI assistant that knows what each user can see](https://sharibj.github.io/project-portfolio/projects/in-app-ai-assistant/)
 
 A prototype assistant built into an enterprise application\. It guides business users through tasks and answers questions using the current screen, the features they can access, and documentation written by the teams that own each part of the UI\.
 
@@ -30,7 +30,7 @@ A prototype assistant built into an enterprise application\. It guides business 
 Technologies: Python · Pydantic · React
 Topics: LLM applications · Retrieval\-augmented generation · Context engineering · Micro\-frontends
 
-## [Making event delivery predictable](https://sharibj.github.io/projects/reliable-event-delivery/) · synthetic example
+## [Making event delivery predictable](https://sharibj.github.io/project-portfolio/projects/reliable-event-delivery/) · synthetic example
 
 A synthetic backend case study about retrying safely, handling duplicates, and making failure visible\.
 
