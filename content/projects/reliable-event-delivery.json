@@ -1,0 +1,59 @@
+{
+  "slug": "reliable-event-delivery",
+  "kind": "synthetic-demo",
+  "visibility": "public-approved",
+  "title": "Making event delivery predictable",
+  "summary": "A synthetic backend case study about retrying safely, handling duplicates, and making failure visible.",
+  "role": "Example backend engineer",
+  "status": "Synthetic design example",
+  "period": "Illustrative, not a real engagement",
+  "accent": "teal",
+  "technologies": ["TypeScript", "PostgreSQL"],
+  "topics": ["Reliability", "Event-driven systems", "Observability"],
+  "highlights": [
+    "Explicit retry and failure states",
+    "Idempotency at the consumer boundary",
+    "A recovery path operators can inspect"
+  ],
+  "problem": [
+    "In this fictional scenario, an integration sends the same event more than once and downstream services occasionally time out. A successful retry must not repeat the business action.",
+    "The example explores a small, understandable design rather than an exactly-once guarantee."
+  ],
+  "constraints": [
+    "Assume at-least-once delivery and temporary downstream failures.",
+    "Keep the operational state visible without exposing customer payloads."
+  ],
+  "contribution": [
+    "This is a synthetic example, not a claim of personal work. An engineer in this scenario would define delivery states, a deduplication boundary, and a recovery workflow.",
+    "Team-level deployment, security review, and production operation are not claimed."
+  ],
+  "decisions": [
+    {
+      "title": "Make retries safe before making them automatic",
+      "choice": "Record a stable event key and the resulting state in the same transaction as the local business change.",
+      "alternative": "Retry every timeout and assume the first attempt failed.",
+      "tradeoff": "The transaction adds storage and cleanup work, but avoids treating an ambiguous network response as proof that nothing happened."
+    },
+    {
+      "title": "Stop retrying when a person needs to decide",
+      "choice": "Use bounded backoff and a failed-delivery queue with an explicit replay action.",
+      "alternative": "Retry indefinitely without exposing an operator workflow.",
+      "tradeoff": "A recovery queue needs ownership and clear diagnostics. It makes unresolved failures visible instead of hiding them in an endless loop."
+    }
+  ],
+  "results": [
+    {
+      "claim": "The design illustrates how one event can be retried without repeating a local side effect.",
+      "basis": "Synthetic reasoning only. No production system, benchmark, or measured improvement is represented."
+    }
+  ],
+  "limitations": ["Cross-service atomicity is not guaranteed. A downstream system still needs an explicit idempotency contract."],
+  "lessons": ["Name ambiguous states instead of pretending every request is a clear success or failure."],
+  "nextSteps": ["For a real project, verify the failure model with duplicate, timeout, replay, and partial-completion tests."],
+  "diagram": {
+    "title": "A public-safe delivery model",
+    "source": "flowchart LR\n  event[Incoming event] --> worker[Delivery worker]\n  worker --> store[(State and deduplication)]\n  worker --> consumer[Idempotent consumer]\n  worker --> recovery[Recovery queue]\n  classDef input fill:#dbeafe,stroke:#1d4ed8,color:#172554\n  classDef process fill:#ccfbf1,stroke:#0f766e,color:#134e4a\n  classDef data fill:#ede9fe,stroke:#6d28d9,color:#2e1065\n  classDef recovery fill:#ffedd5,stroke:#c2410c,color:#431407\n  class event input\n  class worker,consumer process\n  class store data\n  class recovery recovery",
+    "description": "An incoming event reaches a worker. The worker records delivery state and deduplication data, calls an idempotent consumer, and sends unresolved failures to a recovery queue.",
+    "legend": ["Blue: input", "Teal: processing", "Purple cylinder: stored state", "Orange: recovery"]
+  }
+}

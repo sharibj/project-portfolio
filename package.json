@@ -1,0 +1,17 @@
+{
+  "name": "private-work-public-stories",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "npm test && npm run build && node scripts/check.mjs",
+    "package:public": "node scripts/package-public.mjs"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "12.2.0"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+public-package/
+.build-cache/
+.DS_Store
+*.log
+artifacts/
+# Private interview inputs must live OUTSIDE this repository, not here.
